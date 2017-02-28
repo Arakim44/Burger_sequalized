@@ -1,25 +1,16 @@
-// Import the ORM to create functions that will interact with the database
-var orm = require("../config/orm.js");
-
-var model = {
-    selectAll: function(cb) {
-        orm.selectAll(function(res) {
-            cb(res);
-        })
-    },
-
-    updateOne: function(burgerID, cb) {
-        orm.updateOne(burgerID, function(res) {
-            cb(res);
-        })
-    },
-
-    insertOne: function(newBurger, cb) {
-        orm.insertOne(newBurger, function(res) {
-            cb(res);
-        })
+module.exports = function(sequelize, DataTypes){
+  var Burger = sequelize.define("Burger", {
+    burger_name: DataTypes.STRING,
+    devoured: {
+      type: DataTypes.BOOLEAN,
+      defaultValue: false
     }
-}
+  },{
+    classMethods: {
+      associate: function(models){
 
-
-module.exports = model;
+      }
+    }
+  });
+  return Burger;
+};
